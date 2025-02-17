@@ -7,8 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace parkMasterD.utils;
-class Helper{
-    public void SaveToken(string token)
+static class Helper{
+    public static  void SaveToken(string token)
     {
         using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForAssembly())
         {
@@ -22,7 +22,7 @@ class Helper{
         }
     }
 
-    public string LoadToken()
+    public static string LoadToken()
     {
         using (IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForAssembly())
         {
@@ -40,7 +40,7 @@ class Helper{
         }
     }
 
-    public bool IsUserConnected()
+    public static bool IsUserConnected()
     {
         string token = LoadToken();
 
@@ -56,7 +56,7 @@ class Helper{
         return false;
     }
 
-    public bool IsTokenValid(string token)
+    public static bool IsTokenValid(string token)
     {
         // Vous pouvez valider le token en analysant sa structure, ou appeler une API pour vérifier sa validité.
         // Par exemple, décoder le JWT et vérifier la date d'expiration
@@ -74,7 +74,7 @@ class Helper{
         }
     }
 
-    public Dictionary<string, string> DecodeJwt(string token)
+    public static Dictionary<string, string> DecodeJwt(string token)
 {
     var parts = token.Split('.');
     var payload = parts[1];
@@ -86,5 +86,9 @@ class Helper{
      return new Dictionary<string, string>();
     //return JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
 }
+    public static bool IsUserLoggedIn()
+    {
+        return Properties.Settings.Default.IsUserLoggedIn;
+    }
 }
 

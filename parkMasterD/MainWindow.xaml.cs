@@ -20,14 +20,14 @@ namespace parkMasterD
         private readonly UserService _userService;
         public MainWindow(UserService userService)
         {
-            _userService = userService;
+            //_userService = userService;
             InitializeComponent();
-            if (!IsUserLoggedIn())
-            {
-                var loginWindow = new LoginWindow(_userService);
-                loginWindow.Show();
-                //this.Close(); // Fermez MainWindow si l'utilisateur n'est pas connecté
-            }
+            //if (!IsUserLoggedIn())
+            //{
+            //    var loginWindow = new LoginWindow(_userService);
+            //    loginWindow.Show();
+            //    this.Close(); // Fermez MainWindow si l'utilisateur n'est pas connecté
+            //}
         }
 
         public static bool IsUserLoggedIn()

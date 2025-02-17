@@ -41,6 +41,9 @@ namespace parkMasterD
                 // Stockez le token localement (par exemple, dans Settings)
                 Properties.Settings.Default.UserToken = token;
                 Properties.Settings.Default.Save();
+                Application.Current.MainWindow = new MainWindow(uservice);
+                Application.Current.MainWindow.Show();
+                this.Close();
 
             }
             catch (Exception ex)

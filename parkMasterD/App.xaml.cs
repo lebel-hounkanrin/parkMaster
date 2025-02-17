@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 using parkMasterD.Services;
+using parkMasterD.utils;
 
 namespace parkMasterD
 {
@@ -25,9 +26,17 @@ namespace parkMasterD
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             ConfigureServices();
-            MainWindow mainWindow = ServiceProvider.GetService<MainWindow>()!;
-            mainWindow.Show();
+            if (Helper.IsUserLoggedIn())
+            {
+                MainWindow mainWindow = ServiceProvider.GetService<MainWindow>()!;
+                mainWindow.Show();
+            }
+            else
+            {
+                LoginWindow loginWindow = ServiceProvider.GetService<LoginWindow>()!;
+                loginWindow.Show();
 
+            }
         }
     }
 

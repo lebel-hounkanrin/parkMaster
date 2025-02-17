@@ -10,6 +10,7 @@ namespace parkMasterD.Services;
 public class UserService{
     public async Task<string> AuthenticateUserAsync(string email, string password)
     {
+        const string apiUrl = "https://localhost:50866";
         using (var client = new HttpClient())
         {
             var loginData = new
@@ -19,12 +20,16 @@ public class UserService{
             };
 
             //var content = new StringContent(JsonConvert.SerializeObject(loginData), Encoding.UTF8, "application/json");
-            var response = await client.PostAsJsonAsync("https://localhost:50866/user/authenticate", loginData);
+            var response = await client.PostAsJsonAsync($"{apiUrl}/user/authenticate", loginData);
 
             if (response.IsSuccessStatusCode)
             {
                 var token = await response.Content.ReadAsStringAsync();
                 return token;  // Vous pouvez également le désérialiser si nécessaire
+            }
+            else if(response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                throw new Exception("Identifiants incorrects");
             }
             else
             {
