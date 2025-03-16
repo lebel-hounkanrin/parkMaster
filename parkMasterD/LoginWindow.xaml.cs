@@ -22,9 +22,12 @@ namespace parkMasterD
     public partial class LoginWindow : Window
     {
         private readonly UserService uservice;
-        public LoginWindow(UserService service)
+        private readonly ParcService _pservice;
+        public LoginWindow(UserService service, ParcService pservice)
         {
+
             uservice = service;
+            _pservice = pservice;
             InitializeComponent();
         }
 
@@ -40,8 +43,9 @@ namespace parkMasterD
 
                 // Stockez le token localement (par exemple, dans Settings)
                 Properties.Settings.Default.UserToken = token;
+                Properties.Settings.Default.IsUserLoggedIn = true;
                 Properties.Settings.Default.Save();
-                Application.Current.MainWindow = new MainWindow(uservice);
+                Application.Current.MainWindow = new MainWindow(uservice, _pservice);
                 Application.Current.MainWindow.Show();
                 this.Close();
 

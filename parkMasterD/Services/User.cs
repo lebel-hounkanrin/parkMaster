@@ -10,7 +10,7 @@ namespace parkMasterD.Services;
 public class UserService{
     public async Task<string> AuthenticateUserAsync(string email, string password)
     {
-        const string apiUrl = "https://localhost:50866";
+        string apiUrl = Properties.Settings.Default.ApiUrl;   
         using (var client = new HttpClient())
         {
             var loginData = new

@@ -16,9 +16,11 @@ namespace parkMasterD
         {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddSingleton<UserService>();
+            serviceCollection.AddSingleton<ParcService>();
 
             serviceCollection.AddSingleton<LoginWindow>();
             serviceCollection.AddSingleton<MainWindow>();
+            serviceCollection.AddSingleton<CreateDevice>();
 
             ServiceProvider = serviceCollection.BuildServiceProvider();
         }
@@ -33,6 +35,7 @@ namespace parkMasterD
             }
             else
             {
+              
                 LoginWindow loginWindow = ServiceProvider.GetService<LoginWindow>()!;
                 loginWindow.Show();
 
