@@ -22,23 +22,17 @@ namespace parkMasterD
     public partial class CreateDevice : Window
     {
         private readonly ParcService parcService;
-        public CreateDevice(ParcService parcService)
+        public CreateDevice()
         {
-            parcService = parcService;
+            parcService = new ParcService();
             InitializeComponent();
         }
-        private void Window_Activated(object sender, EventArgs e)
+
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (parcService != null)
-            {
-                parcService.GetExistingParcAsync();
-            }
-            else
-            {
-                // Handle the null case, possibly by initializing parcService or logging an error
-                // parcService = new ParcService(); // Example initialization
-            }
+            parcNamesComboBox.ItemsSource = await parcService.GetExistingParcAsync();
         }
+
         private void okButton_Click(object sender, RoutedEventArgs e) {
             Properties.Settings.Default.IsDeviceCreated = true;
             Properties.Settings.Default.Save();

@@ -73,7 +73,7 @@ namespace parkMasterD.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://localhost:50866")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:5000")]
         public string ApiUrl {
             get {
                 return ((string)(this["ApiUrl"]));

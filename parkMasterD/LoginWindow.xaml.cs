@@ -12,22 +12,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
 using parkMasterD.Services;
 
 namespace parkMasterD
 {
+    public class UserData
+    {
+        public string Token { get; set; }
+        public string UserName { get; set; }
+    }
     /// <summary>
     /// Logique d'interaction pour LoginWindow.xaml
     /// </summary>
     public partial class LoginWindow : Window
     {
         private readonly UserService uservice;
-        private readonly ParcService _pservice;
-        public LoginWindow(UserService service, ParcService pservice)
+        public LoginWindow(UserService service)
         {
 
             uservice = service;
-            _pservice = pservice;
             InitializeComponent();
         }
 
@@ -39,13 +43,15 @@ namespace parkMasterD
             try
             {
                 // Appelez la méthode AuthenticateAsync pour récupérer le token
-                string token = await uservice.AuthenticateUserAsync(email, password);
+                string response = await uservice.AuthenticateUserAsync(email, password);
+                var data = JsonConvert.DeserializeObject<UserData>(response);
 
                 // Stockez le token localement (par exemple, dans Settings)
-                Properties.Settings.Default.UserToken = token;
+                Properties.Settings.Default.UserToken = data.Token;
+                Properties.Settings.Default.Username = data.UserName;
                 Properties.Settings.Default.IsUserLoggedIn = true;
                 Properties.Settings.Default.Save();
-                Application.Current.MainWindow = new MainWindow(uservice, _pservice);
+                Application.Current.MainWindow = new MainWindow(uservice);
                 Application.Current.MainWindow.Show();
                 this.Close();
 

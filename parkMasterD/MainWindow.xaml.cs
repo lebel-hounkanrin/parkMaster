@@ -19,10 +19,9 @@ namespace parkMasterD
     public partial class MainWindow : Window
     {
         private readonly UserService _userService;
-        private readonly ParcService _parcService;
-        public MainWindow(UserService userService, ParcService parcService)
+        
+        public MainWindow(UserService userService)
         {
-            _parcService = parcService;
             //_userService = userService;
             InitializeComponent(); 
             //if (!IsUserLoggedIn())
@@ -39,7 +38,7 @@ namespace parkMasterD
             if (!isDeviceCreated)
             {
               
-                CreateDevice createDevice = new CreateDevice(_parcService);
+                CreateDevice createDevice = new CreateDevice();
                 createDevice.Show();
             }
             else

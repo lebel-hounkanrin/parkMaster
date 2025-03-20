@@ -7,7 +7,8 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CreateDevice"
-        Activated="Window_Activated">
+        Loaded="Window_Loaded"
+      >
 
     <Grid Margin="10">
         <Grid.Resources>
@@ -34,27 +35,18 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
         <!-- Left,Top,Right,Bottom margins-->
-        <Label Grid.Column="0" Grid.Row="0">Left Margin:</Label>
-        <TextBox Name="leftMarginTextBox" Grid.Column="1" Grid.Row="0" />
+        <Label Grid.Column="0" Grid.Row="0">Nom du parc:</Label>
+        <ComboBox Name="parcNamesComboBox" Grid.Column="1" Grid.Row="0" DisplayMemberPath="Name" />
 
-        <Label Grid.Column="0" Grid.Row="1">Top Margin:</Label>
+        <Label Grid.Column="0" Grid.Row="1">Nom de la salle:</Label>
         <TextBox Name="topMarginTextBox" Grid.Column="1" Grid.Row="1"/>
 
-        <Label Grid.Column="0" Grid.Row="2">Right Margin:</Label>
-        <TextBox Name="rightMarginTextBox" Grid.Column="1" Grid.Row="2" />
-
-        <Label Grid.Column="0" Grid.Row="3">Bottom Margin:</Label>
-        <TextBox Name="bottomMarginTextBox" Grid.Column="1" Grid.Row="3" />
-
         <!-- Accept or Cancel -->
-        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Name="okButton" Click="okButton_Click" IsDefault="True">OK</Button>
             <Button Name="cancelButton" IsCancel="True">Cancel</Button>
         </StackPanel>
