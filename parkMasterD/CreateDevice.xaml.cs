@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using parkMasterD.Services;
+using parkMasterD.utils;
 
 namespace parkMasterD
 {
@@ -48,10 +49,34 @@ namespace parkMasterD
         }
 
         private void okButton_Click(object sender, RoutedEventArgs e) {
-            Properties.Settings.Default.IsDeviceCreated = true;
-            Properties.Settings.Default.Save();
-            DeviceData deviceData = new DeviceData();
-            deviceData.Show();
+            var selectedParc = parcNamesComboBox.SelectedItem as Parc;
+            var selectedRoom = sallesComboBox.SelectedItem as Salle;
+            if (selectedParc != null && selectedParc != null)
+            {
+                int parcId = selectedParc.Id;
+                int salleId = selectedParc.Id;
+
+                // MessageBox.Show($"Parc ID: {parcId}\nSalle ID: {salleId}");
+                var isDeviceCreated = parcService.CreateDevice(parcId, salleId).Result;
+                var systemInfo = SystemInfo.GetSystemInfo();
+
+                if (isDeviceCreated)
+                {
+                    MessageBox.Show($"Nom: {systemInfo.Name}\n" +
+                    $"Type de périphérique: {systemInfo.DeviceType}\n" +
+                    $"Marque: {systemInfo.Brand}\n" +
+                    $"Modèle: {systemInfo.Model}\n" +
+                    $"Numéro de série: {systemInfo.SerialNumber}");
+                }
+                else
+                {
+                    MessageBox.Show("Veuillez sélectionner un parc et une salle.");
+                }
+                //Properties.Settings.Default.IsDeviceCreated = true;
+                //Properties.Settings.Default.Save();
+                //DeviceData deviceData = new DeviceData();
+                //deviceData.Show();
+            }
         }
         private void cancelButton_Click(object sender, RoutedEventArgs e) { }
     }
