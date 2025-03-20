@@ -13,6 +13,13 @@ namespace parkMasterD.Services
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public List<Salle> Salles { get; set; }
+    }
+    public class Salle
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
     public class ParcService
     {

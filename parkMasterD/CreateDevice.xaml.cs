@@ -32,6 +32,20 @@ namespace parkMasterD
         {
             parcNamesComboBox.ItemsSource = await parcService.GetExistingParcAsync();
         }
+        private void parcNamesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+        
+            var selectedParc = parcNamesComboBox.SelectedItem as Parc;
+
+            if (selectedParc != null)
+            {
+                sallesComboBox.ItemsSource = selectedParc.Salles;
+            }
+            else
+            {
+                sallesComboBox.ItemsSource = null;
+            }
+        }
 
         private void okButton_Click(object sender, RoutedEventArgs e) {
             Properties.Settings.Default.IsDeviceCreated = true;
