@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using parkMasterD.utils;
 
 namespace parkMasterD
 {
@@ -22,6 +23,8 @@ namespace parkMasterD
         public DeviceData()
         {
             InitializeComponent();
+            TechnicalSpecs technicalSpecs = new TechnicalSpecs();
+            technicalSpecs.ShowSystemInfoInMessageBox();
         }
     }
 }
