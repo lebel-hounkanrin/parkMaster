@@ -114,7 +114,7 @@ namespace parkMasterD.utils
 
         public void ShowSystemInfoInMessageBox()
         {
-            // Appeler GetSystemInfo() pour récupérer les informations
+        
             GetSystemInfo();
 
             // Construire le message
@@ -126,7 +126,7 @@ namespace parkMasterD.utils
                              $"Espace libre: {FreeStorage / (1024 * 1024 * 1024)} Go\n" + // Affichage en Go
                              $"Carte graphique: {GraphicsCard}";
 
-            // Afficher les informations dans une MessageBox
+       
             MessageBox.Show(message, "Informations Système", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 

@@ -24,7 +24,8 @@ namespace parkMasterD
         {
             InitializeComponent();
             TechnicalSpecs technicalSpecs = new TechnicalSpecs();
-            technicalSpecs.ShowSystemInfoInMessageBox();
+            NetworkInfo networkInfo = new NetworkInfo();
+            networkInfo.ShowNetworkInfoInMessageBox();
         }
     }
 }
