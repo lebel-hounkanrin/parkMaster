@@ -76,6 +76,7 @@ namespace parkMasterD.Services
                     ParcId = parcId,
                     SalleId = salleId,
                     Name = systemInfo.Name ?? "-",
+                    DeviceType = "Desktop",
                     Brand = systemInfo.Brand ?? "-",
                     Model = systemInfo.Model ?? "-",
                     SerialNumber = systemInfo.SerialNumber ?? "-"

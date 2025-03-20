@@ -48,7 +48,7 @@ namespace parkMasterD
             }
         }
 
-        private void okButton_Click(object sender, RoutedEventArgs e) {
+        private async void okButton_Click(object sender, RoutedEventArgs e) {
             var selectedParc = parcNamesComboBox.SelectedItem as Parc;
             var selectedRoom = sallesComboBox.SelectedItem as Salle;
             if (selectedParc != null && selectedParc != null)
@@ -57,7 +57,7 @@ namespace parkMasterD
                 int salleId = selectedParc.Id;
 
                 // MessageBox.Show($"Parc ID: {parcId}\nSalle ID: {salleId}");
-                var isDeviceCreated = parcService.CreateDevice(parcId, salleId).Result;
+                var isDeviceCreated = await parcService.CreateDevice(parcId, salleId);
                 var systemInfo = SystemInfo.GetSystemInfo();
 
                 if (isDeviceCreated)
