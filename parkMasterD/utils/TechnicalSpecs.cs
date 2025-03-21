@@ -13,7 +13,7 @@ namespace parkMasterD.utils
         public string OperatingSystem { get; set; }
         public string Processor { get; set; }
         public long TotalRamSize { get; set; }
-        public string TotalStorage { get; set; }
+        public long TotalStorage { get; set; }
         public string GraphicsCard { get; set; }
         public long FreeRamSize { get; set; }
         public long FreeStorage { get; set; }
@@ -23,7 +23,7 @@ namespace parkMasterD.utils
         public string OperatingSystem { get; set; }
         public string Processor { get; set; }
         public long TotalRamSize { get; set; }
-        public string TotalStorage { get; set; }
+        public long TotalStorage { get; set; }
         public string GraphicsCard { get; set; }
         public long FreeRamSize { get; set; }
         public long FreeStorage { get; set; }
@@ -78,13 +78,14 @@ namespace parkMasterD.utils
             return totalRam;
         }
 
-        private string GetTotalStorage()
+        private long GetTotalStorage()
         {
-            string totalStorage = string.Empty;
+            long totalStorage = 0;
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDisk WHERE DriveType=3");
             foreach (ManagementObject queryObj in searcher.Get())
             {
-                totalStorage = (Convert.ToInt64(queryObj["Size"]) / (1024 * 1024 * 1024)).ToString() + " GB";
+                // totalStorage = (Convert.ToInt64(queryObj["Size"]) / (1024 * 1024 * 1024)).ToString() + " GB";
+                totalStorage = Convert.ToInt64(queryObj["Size"]);
             }
             return totalStorage;
         }
@@ -132,7 +133,7 @@ namespace parkMasterD.utils
                              $"Processeur: {Processor}\n" +
                              $"RAM totale: {TotalRamSize / (1024 * 1024 * 1024)} Go\n" +
                              $"RAM libre: {FreeRamSize / 1024} Mo\n" + // Affichage en Mo
-                             $"Stockage total: {TotalStorage}\n" +
+                             $"Stockage total: {TotalStorage / (1024 * 1024 * 1024)} Go\n" +
                              $"Espace libre: {FreeStorage / (1024 * 1024 * 1024)} Go\n" + // Affichage en Go
                              $"Carte graphique: {GraphicsCard}";
 
