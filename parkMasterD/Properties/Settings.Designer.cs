@@ -79,5 +79,17 @@ namespace parkMasterD.Properties {
                 return ((string)(this["ApiUrl"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int DeviceId {
+            get {
+                return ((int)(this["DeviceId"]));
+            }
+            set {
+                this["DeviceId"] = value;
+            }
+        }
     }
 }

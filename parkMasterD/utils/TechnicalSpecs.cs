@@ -8,6 +8,16 @@ using System.Windows;
 
 namespace parkMasterD.utils
 {
+    public class TechnicalSpecsData
+    {
+        public string OperatingSystem { get; set; }
+        public string Processor { get; set; }
+        public long TotalRamSize { get; set; }
+        public string TotalStorage { get; set; }
+        public string GraphicsCard { get; set; }
+        public long FreeRamSize { get; set; }
+        public long FreeStorage { get; set; }
+    }
     public class TechnicalSpecs
     {
         public string OperatingSystem { get; set; }
@@ -18,7 +28,7 @@ namespace parkMasterD.utils
         public long FreeRamSize { get; set; }
         public long FreeStorage { get; set; }
 
-        public void GetSystemInfo()
+        private void _GetSystemInfo()
         {
             OperatingSystem = GetOperatingSystem();
 
@@ -115,7 +125,7 @@ namespace parkMasterD.utils
         public void ShowSystemInfoInMessageBox()
         {
         
-            GetSystemInfo();
+            _GetSystemInfo();
 
             // Construire le message
             string message = $"Système d'exploitation: {OperatingSystem}\n" +
@@ -128,6 +138,21 @@ namespace parkMasterD.utils
 
        
             MessageBox.Show(message, "Informations Système", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        public TechnicalSpecsData GetSystemInfo()
+        {
+            _GetSystemInfo();
+            return new TechnicalSpecsData
+            {
+                OperatingSystem = OperatingSystem,
+                Processor = Processor,
+                TotalRamSize = TotalRamSize,
+                TotalStorage = TotalStorage,
+                GraphicsCard = GraphicsCard,
+                FreeRamSize = FreeRamSize,
+                FreeStorage = FreeStorage
+            };
         }
 
     }

@@ -17,5 +17,8 @@
     <Setting Name="ApiUrl" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://localhost:5000</Value>
     </Setting>
+    <Setting Name="DeviceId" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
