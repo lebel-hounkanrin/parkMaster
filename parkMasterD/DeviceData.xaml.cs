@@ -25,7 +25,10 @@ namespace parkMasterD
             InitializeComponent();
             TechnicalSpecs technicalSpecs = new TechnicalSpecs();
             NetworkInfo networkInfo = new NetworkInfo();
+            SystemPerformanceInfo systemPerformanceInfo = new SystemPerformanceInfo();
+            technicalSpecs.ShowSystemInfoInMessageBox();
             networkInfo.ShowNetworkInfoInMessageBox();
+            systemPerformanceInfo.ShowSystemPerformanceInfo();
         }
     }
 }
