@@ -9,6 +9,14 @@ using System.Windows;
 
 namespace parkMasterD.utils
 {
+    public class NetworkInfoData
+    {
+        public string IpAddress { get; set; }
+        public string MacAddress { get; set; }
+        public string Hostname { get; set; }
+        public string Network { get; set; }
+        public string ConnectionType { get; set; }
+    }
     public class NetworkInfo
     {
         public string IpAddress { get; set; }
@@ -17,7 +25,7 @@ namespace parkMasterD.utils
         public string Network { get; set; }
         public string ConnectionType { get; set; }
 
-        public void GetNetworkInfo()
+        private void _GetNetworkInfo()
         {
             // Récupérer l'adresse IP
             IpAddress = GetIpAddress();
@@ -125,8 +133,7 @@ namespace parkMasterD.utils
 
         public void ShowNetworkInfoInMessageBox()
         {
-            // Appeler GetNetworkInfo() pour récupérer les informations
-            GetNetworkInfo();
+            _GetNetworkInfo();
 
             // Construire le message
             string message = $"Adresse IP: {IpAddress}\n" +
@@ -137,6 +144,19 @@ namespace parkMasterD.utils
 
             // Afficher les informations dans une MessageBox
             MessageBox.Show(message, "Informations Réseau", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        public NetworkInfoData GetNetworkInfo()
+        {
+            _GetNetworkInfo();
+            return new NetworkInfoData
+            {
+                IpAddress = IpAddress,
+                MacAddress = MacAddress,
+                Hostname = Hostname,
+                Network = Network,
+                ConnectionType = ConnectionType
+            };
         }
     }
 }
