@@ -10,6 +10,15 @@ using System.Windows;
 
 namespace parkMasterD.utils
 {
+    public class SystemPerformanceInfoData
+    {
+        public long FreeStorage { get; set; }
+        public long FreeRamSize { get; set; }
+        public long DiskRead { get; set; }
+        public long DiskWrite { get; set; }
+        public long NetSend { get; set; }
+        public long NetReceive { get; set; }
+    }
     public class SystemPerformanceInfo
     {
         public long FreeStorage { get; set; }
@@ -19,20 +28,17 @@ namespace parkMasterD.utils
         public long NetSend { get; set; }
         public long NetReceive { get; set; }
 
-        // Méthode pour récupérer ces informations
-        public void GetSystemPerformanceInfo()
+        
+        private void _GetSystemPerformanceInfo()
         {
 
-            // Obtenir l'espace de stockage libre
+            
             FreeStorage = GetFreeStorage();
 
-            // Obtenir la mémoire RAM libre
             FreeRamSize = GetFreeRam();
 
-            // Obtenir les statistiques de lecture et d'écriture du disque
             (DiskRead, DiskWrite) = GetDiskIOStats();
 
-            // Obtenir les statistiques réseau (envoi et réception)
             (NetSend, NetReceive) = GetNetworkStats();
 
         }
@@ -95,7 +101,7 @@ namespace parkMasterD.utils
 
         public void ShowSystemPerformanceInfo()
         {
-            GetSystemPerformanceInfo();
+            _GetSystemPerformanceInfo();
 
             string message = $"Espace libre disque: {FreeStorage / (1024 * 1024 * 1024)} Go\n" +
                              $"RAM libre: {FreeRamSize / (1024 * 1024)} Mo\n" + // En Mo
@@ -107,6 +113,20 @@ namespace parkMasterD.utils
 
             
             MessageBox.Show(message, "Informations Performance Système", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        public SystemPerformanceInfoData GetSystemPerformanceInfo()
+        {
+            _GetSystemPerformanceInfo();
+            return new SystemPerformanceInfoData
+            {
+                FreeStorage = FreeStorage,
+                FreeRamSize = FreeRamSize,
+                DiskRead = DiskRead,
+                DiskWrite = DiskWrite,
+                NetSend = NetSend,
+                NetReceive = NetReceive
+            };
         }
     }
 }

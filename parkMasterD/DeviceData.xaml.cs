@@ -32,7 +32,7 @@ namespace parkMasterD
             //systemPerformanceInfo.ShowSystemPerformanceInfo();
 
             DeviceService deviceService = new DeviceService();
-            deviceService.createNetworkInfo();
+            deviceService.createVariableInfo();
         }
     }
 }

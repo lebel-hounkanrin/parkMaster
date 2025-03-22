@@ -98,5 +98,50 @@ namespace parkMasterD.Services
                 throw new Exception("Erreur lors de l'envoi des informations relatives au réseau", ex);
             }
         }
+
+        public async Task<bool> createVariableInfo()
+        {
+            try
+            {
+                var variableInfo = new SystemPerformanceInfo();
+                var data = variableInfo.GetSystemPerformanceInfo();
+                var deviceData = new
+                {
+                    DeviceId = Properties.Settings.Default.DeviceId,
+                    FreeStorage = data.FreeStorage.ToString(),
+                    FreeRamSize = data.FreeRamSize.ToString(),
+                    //CpuUsage = data.CpuUsage,
+                    //RamUsage = data.RamUsage,
+                    DiskRead = data.DiskRead.ToString(),
+                    DiskWrite = data.DiskWrite.ToString(),
+                    NetSend = data.NetSend.ToString(),
+                    NetReceive = data.NetReceive.ToString()
+                };
+                var token = Properties.Settings.Default.UserToken;
+                var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"{apiUrl}/DeviceVariable");
+                requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                requestMessage.Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(deviceData), Encoding.UTF8, "application/json");
+                var response = await http.SendAsync(requestMessage);
+                if (response.IsSuccessStatusCode)
+                {
+                    //Properties.Settings.Default.IsVariableInfoCreated = true;
+                    //Properties.Settings.Default.Save();
+                    //return true;
+                }
+                if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    Properties.Settings.Default.IsUserLoggedIn = false;
+                    Properties.Settings.Default.UserToken = String.Empty;
+                    Properties.Settings.Default.Username = String.Empty;
+                    Properties.Settings.Default.Save();
+                    return false;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erreur lors de l'envoi des informations relatives aux variables", ex);
+            }
+        }
     }
 }
